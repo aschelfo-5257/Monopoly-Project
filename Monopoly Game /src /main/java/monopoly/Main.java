@@ -1,4 +1,4 @@
-package com.monopoly;
+package monopoly;
 
 import java.util.Scanner;
 import java.util.Random;

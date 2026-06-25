@@ -1,135 +1,36 @@
 package monopoly;
+
 import java.util.Random;
 
 public class Dice {
-    private Random random = new Random();
+    private final Random random = new Random();
+    private int die1;
+    private int die2;
 
-    public int[] rollTwoDice() {
-        int die1 = random.nextInt(6) + 1;
-        int die2 = random.nextInt(6) + 1;
+    /**
+     * Rolls two 6-sided dice, stores their values, and returns them as an array.
+     */
+    public int[] roll() {
+        this.die1 = random.nextInt(6) + 1;
+        this.die2 = random.nextInt(6) + 1;
         return new int[]{die1, die2};
     }
-}
 
-    public int roll() {
-        int die1 = random.nextInt(6) + 1; // Roll first die (1-6)
-        int die2 = random.nextInt(6) + 1; // Roll second die (1-6)
-        return die1 + die2; // Return the total of both dice
+    /**
+     * Returns the sum of the last rolled dice.
+     */
+    public int getTotal() {
+        return die1 + die2;
     }
 
+    /**
+     * Checks if the last roll resulted in doubles.
+     */
     public boolean isDouble() {
-        int die1 = random.nextInt(6) + 1; // Roll first die (1-6)
-        int die2 = random.nextInt(6) + 1; // Roll second die (1-6)
-        return die1 == die2; // Check if both dice show the same number
+        return die1 == die2;
     }
 
-    public int[] rollTwoDice() {
-        int die1 = random.nextInt(6) + 1; // Roll first die (1-6)
-        int die2 = random.nextInt(6) + 1; // Roll second die (1-6)
-        return new int[]{die1, die2}; // Return both dice values
-    }
-
-    public int rollSingleDie() {
-        return random.nextInt(6) + 1; // Roll a single die (1-6)
-    }
-
-    if (isDouble()) {
-        // Handle the case where the player rolled doubles
-        // For example, you might want to allow the player to take another turn
-    }
-
-    if (roll() == 2) {
-        // Handle the case where the player rolled snake eyes (double ones)
-        // For example, you might want to give the player a bonus or a penalty
-    }
-
-    if (roll() == 3) {
-        // Handle the case where the player rolled a three
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 4) {
-        // Handle the case where the player rolled a four
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 5) {
-        // Handle the case where the player rolled a five
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 6) {
-        // Handle the case where the player rolled a six
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 7) {
-        // Handle the case where the player rolled a seven
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 8) {
-        // Handle the case where the player rolled an eight
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 9) {
-        // Handle the case where the player rolled a nine
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 10) {
-        // Handle the case where the player rolled a ten
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 11) {
-        // Handle the case where the player rolled an eleven
-        // For example, you might want to trigger a special event or action
-    }
-
-    if (roll() == 12) {
-        // Handle the case where the player rolled a double six
-        // For example, you might want to send the player to jail
-    }
-
-    switch (roll()) {
-        case 2:
-            // Handle snake eyes
-            break;
-        case 3:
-            // Handle three
-            break;
-        case 4:
-            // Handle four
-            break;
-        case 5:
-            // Handle five
-            break;
-        case 6:
-            // Handle six
-            break;
-        case 7:
-            // Handle seven
-            break;
-        case 8:
-            // Handle eight
-            break;
-        case 9:
-            // Handle nine
-            break;
-        case 10:
-            // Handle ten
-            break;
-        case 11:
-            // Handle eleven
-            break;
-        case 12:
-            // Handle double sixes
-            break;
-
-        default:
-            // Handle any other rolls (if necessary)
-            break;
-    }
+    // Getters if needed by other classes
+    public int getDie1() { return die1; }
+    public int getDie2() { return die2; }
 }

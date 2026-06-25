@@ -7,8 +7,8 @@ public class Board {
     // Single instance reused for all dice rolls
     private final Random random = new Random(); 
 
-    public GameController(Game game) {
-        this.game = game;
+    public Board(Game game) {
+    this.game = game;
     }
 
     public void startGame() {
@@ -42,8 +42,12 @@ public class Board {
     }
 
     private int rollDice() {
-        return random.nextInt(6) + 1; 
+    int die1 = random.nextInt(6) + 1;
+    int die2 = random.nextInt(6) + 1;
+    // You can also add logic here to check if (die1 == die2) for doubles
+    return die1 + die2;
     }
+
 
     public void resetGame() {
         game.reset();

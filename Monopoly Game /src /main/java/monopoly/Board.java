@@ -2,7 +2,7 @@ package monopoly;
 
 import java.util.Random;
 
-public class GameController {
+public class Board {
     private final Game game;
     // Single instance reused for all dice rolls
     private final Random random = new Random(); 

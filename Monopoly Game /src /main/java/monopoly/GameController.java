@@ -1,17 +1,15 @@
 package monopoly;
 
 import java.util.Scanner;
-import java.util.Random;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
-import java.util.*;
 
 public class GameController {
     private Game game;
+    private Dice dice; // Use your dedicated Dice class
 
     public GameController(Game game) {
         this.game = game;
+        this.dice = new Dice(); // Instantiate the dice object
     }
 
     public void startGame() {
@@ -33,18 +31,28 @@ public class GameController {
     }
 
     public void handlePlayerTurn(Player player) {
-        System.out.println(player.getName() + "'s turn.");
-        int diceRoll = rollDice();
-        System.out.println("You rolled a " + diceRoll);
-        player.move(diceRoll);
+        System.out.println("\n" + player.getName() + "'s turn.");
+        
+        // 1. Roll two dice using your object array method
+        int[] result = dice.rollTwoDice();
+        int die1 = result[0];
+        int die2 = result[1];
+        int totalRoll = die1 + die2;
+        
+        System.out.println("You rolled: [" + die1 + "] and [" + die2 + "] (Total: " + totalRoll + ")");
+        
+        // 2. Check for monopoly doubles rule
+        if (die1 == die2) {
+            System.out.println("Doubles! You get another turn after this.");
+            // Note: You can add an extra turn flag or tracking logic here
+        }
+
+        // 3. Move player and handle board interaction
+        player.move(totalRoll);
         Space currentSpace = game.getBoard().getSpace(player.getPosition());
         System.out.println("You landed on " + currentSpace.getName());
-        // Handle space actions (e.g., buy property, pay rent, etc.)
-    }
-
-    private int rollDice() {
-        Random random = new Random();
-        return random.nextInt(6) + 1; // Simulate rolling a 6-sided die
+        
+        // TODO: Invoke space actions (e.g., currentSpace.executeAction(player);)
     }
 
     public void resetGame() {

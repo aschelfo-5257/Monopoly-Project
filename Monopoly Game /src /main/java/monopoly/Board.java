@@ -1,14 +1,11 @@
 package monopoly;
 
-import java.util.Scanner;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.*;
 
 public class GameController {
-    private Game game;
+    private final Game game;
+    // Single instance reused for all dice rolls
+    private final Random random = new Random(); 
 
     public GameController(Game game) {
         this.game = game;
@@ -28,7 +25,8 @@ public class GameController {
 
     public void displayPlayerStatus() {
         for (Player player : game.getPlayers()) {
-            System.out.println(player.getName() + " - Position: " + player.getPosition() + ", Money: $" + player.getMoney());
+            System.out.println(player.getName() + " - Position: " + 
+                               player.getPosition() + ", Money: $" + player.getMoney());
         }
     }
 
@@ -37,14 +35,14 @@ public class GameController {
         int diceRoll = rollDice();
         System.out.println("You rolled a " + diceRoll);
         player.move(diceRoll);
+        
         Space currentSpace = game.getBoard().getSpace(player.getPosition());
         System.out.println("You landed on " + currentSpace.getName());
-        // Handle space actions (e.g., buy property, pay rent, etc.)
+        
     }
 
     private int rollDice() {
-        Random random = new Random();
-        return random.nextInt(6) + 1; // Simulate rolling a 6-sided die
+        return random.nextInt(6) + 1; 
     }
 
     public void resetGame() {

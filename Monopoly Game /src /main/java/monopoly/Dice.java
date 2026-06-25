@@ -1,18 +1,15 @@
 package monopoly;
-
-import java.util.Scanner;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import java.util.*;
 
 public class Dice {
-    private Random random;
+    private Random random = new Random();
 
-    public Dice() {
-        random = new Random();
+    public int[] rollTwoDice() {
+        int die1 = random.nextInt(6) + 1;
+        int die2 = random.nextInt(6) + 1;
+        return new int[]{die1, die2};
     }
+}
 
     public int roll() {
         int die1 = random.nextInt(6) + 1; // Roll first die (1-6)

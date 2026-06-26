@@ -4,44 +4,58 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Main {
+    private static final int MIN_PLAYERS = 2;
+    private static final int MAX_PLAYERS = 8;
+    private static Scanner scanner;
+    
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to Monopoly!");
-        
-        int numPlayers = 0;
-        
-        // Input Validation Loop
+        try (Scanner s = new Scanner(System.in)) {
+            scanner = s;
+            System.out.println("Welcome to Monopoly!");
+            
+            int numPlayers = getNumberOfPlayers();
+            Player[] players = initializePlayers(numPlayers);
+            
+            Game game = new Game(players);
+            game.start();
+        }
+    }
+    
+    private static int getNumberOfPlayers() {
         while (true) {
-            System.out.print("Enter the number of players (2-8): ");
+            System.out.printf("Enter the number of players (%d-%d): ", MIN_PLAYERS, MAX_PLAYERS);
             try {
-                numPlayers = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline
+                int num = scanner.nextInt();
+                scanner.nextLine();
                 
-                if (numPlayers >= 2 && numPlayers <= 8) {
-                    break; // Valid input, exit loop
+                if (num >= MIN_PLAYERS && num <= MAX_PLAYERS) {
+                    return num;
                 }
-                System.out.println("Error: Monopoly requires 2 to 8 players.");
+                System.out.printf("Error: Monopoly requires %d to %d players.%n", MIN_PLAYERS, MAX_PLAYERS);
             } catch (InputMismatchException e) {
                 System.out.println("Error: Please enter a valid number.");
-                scanner.nextLine(); // Clear the invalid input token from the buffer
+                scanner.nextLine();
             }
         }
-
-        // Initialize Players
+    }
+    
+    private static Player[] initializePlayers(int numPlayers) {
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < numPlayers; i++) {
-            String name = "";
-            while (name.trim().isEmpty()) {
-                System.out.print("Enter name for Player " + (i + 1) + ": ");
-                name = scanner.nextLine();
-            }
+            String name = getPlayerName(i + 1);
             players[i] = new Player(name);
         }
-
-        // Start Game
-        Game game = new Game(players);
-        game.start();
-
-        scanner.close();
+        return players;
+    }
+    
+    private static String getPlayerName(int playerNumber) {
+        while (true) {
+            System.out.print("Enter name for Player " + playerNumber + ": ");
+            String name = scanner.nextLine().trim();
+            if (!name.isEmpty()) {
+                return name;
+            }
+            System.out.println("Name cannot be empty. Please try again.");
+        }
     }
 }
